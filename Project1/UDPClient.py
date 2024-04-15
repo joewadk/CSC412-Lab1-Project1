@@ -57,7 +57,7 @@ def values_small(): #min
 
 for i in range(10): #send 10 pings
     sendPing() #call func
-    scan_errors
+    scan_errors()
 
 
 print('The mean RTT was: %f ms' %values_mean())
