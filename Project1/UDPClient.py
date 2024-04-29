@@ -24,7 +24,7 @@ def sendPing():
 
 def scan_errors():
     for i in pingPong.keys(): #iterate through all keys, ie all sequence numbers
-         if (pingPong[i]==error or 'ERROR' or None) or pingPong[10]== None:  #we check if any of the values has an error or there is no tenth RTT to print
+         if pingPong[i] == 'ERROR' or pingPong[i] is None or (i == 10 and pingPong[10] is None):  #we check if any of the values has an error or there is no tenth RTT to print
                 clientSocket = socket(AF_INET, SOCK_DGRAM) #if we get an error, this will send another ping for this sequence
                 time_sent= (datetime.now().microsecond)/1000 #grab current time in us, converts micro to milli 
                 clientSocket.sendto(message.encode(),("localhost", serverPort)) #send the ping
@@ -57,7 +57,7 @@ def values_small(): #min
 
 for i in range(10): #send 10 pings
     sendPing() #call func
-    scan_errors()
+scan_errors()
 
 
 print('The mean RTT was: %f ms' %values_mean())
